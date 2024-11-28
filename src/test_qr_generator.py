@@ -21,3 +21,19 @@ class TestQRCodeGenerator:
         assert generator.version == 1  # Default version
         assert generator.box_size == 10  # Default box size
         assert generator.border == 4  # Default border
+
+    def test_generate_qr_code_with_custom_parameters(self):
+
+        generator = QRCodeGenerator(version=2, box_size=15, border=5)
+        assert generator.version == 2
+        assert generator.box_size == 15
+        assert generator.border == 5
+
+    def test_generate_qr_code_returns_image(self):
+        """
+        Test if generate_qr_code method returns a PIL Image
+        Benefits: Validates correct image output type
+        """
+        generator = QRCodeGenerator()
+        result = generator.generate_qr_code("Test Text")
+        assert isinstance(result, Image.Image)
