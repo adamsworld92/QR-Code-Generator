@@ -30,10 +30,9 @@ class TestQRCodeGenerator:
         assert generator.border == 5
 
     def test_generate_qr_code_returns_image(self):
-        """
-        Test if generate_qr_code method returns a PIL Image
-        Benefits: Validates correct image output type
-        """
+
         generator = QRCodeGenerator()
-        result = generator.generate_qr_code("Test Text")
-        assert isinstance(result, Image.Image)
+        qrcode = generator.generate_qr_code("Test Text")
+        assert isinstance(qr_code, qrcode.QRCode)
+        qr_image = qr_code.make_image()
+        assert isinstance(qr_image, qrcode.image.PilImage)
