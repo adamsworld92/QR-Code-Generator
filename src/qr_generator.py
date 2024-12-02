@@ -1,4 +1,6 @@
 import qrcode
+from qrcode import QRCode
+from qrcode.image.styledpil import StyledPilImage
 from PIL import Image
 from pathlib import Path
 
@@ -16,6 +18,13 @@ class QRCodeGenerator:
             border=border
         )
 
+    def generate_qr_code(self, data):
+        qr = QRCode(version=1, box_size=10, border=5)
+        qr.add_data(data)
+        qr.make(fit=True)
+        return qr.make_image(fill_color="black", back_color="white")
+
+
     def generate_qr_code(self, text: str) -> Image.Image:
    
         # Clear any existing data
@@ -26,10 +35,5 @@ class QRCodeGenerator:
         self.qr.make(fit=True)
         # Create and return the image
         return self.qr.make_image(fill_color="black", back_color="white")
-    
-    def generate_qr_code(self, data):
-        qr = qrcode.QRCode(version=1, box_size=10, border=5)
-        qr.add_data(data)
-        qr.make(fit=True)
-        return qr  # Return the QRCode object instead of the image
+     # Return the QRCode object instead of the image
     
